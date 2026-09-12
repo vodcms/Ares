@@ -255,7 +255,11 @@ printf '  failed:    %d\n' "${COUNTS[fail]}"
 
 if [[ ${#UNKNOWN_LIST[@]} -gt 0 ]]; then
   echo "--------"
-  echo "Unknown files (defaulted to sRGB albedo; use SKIP_UNKNOWN=1 to skip):"
+  if [[ "$SKIP_UNKNOWN" == "1" ]]; then
+    echo "Unknown files (skipped):"
+  else
+    echo "Unknown files (defaulted to sRGB albedo):"
+  fi
   for u in "${UNKNOWN_LIST[@]}"; do
     echo "  - $u"
   done
